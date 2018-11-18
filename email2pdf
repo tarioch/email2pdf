@@ -340,7 +340,7 @@ def handle_plain_message_body(part):
             logger.info("Determined email is plain text with charset " + str(charset))
 
         if isinstance(payload, bytes):
-            payload = str(payload, charset)
+            payload = str(payload, charset, errors='ignore')
 
         payload = html.escape(payload)
         payload = "<html><body><pre>\n" + payload + "\n</pre></body></html>"
@@ -381,7 +381,7 @@ def handle_html_message_body(input_email, part):
             return "broken"
 
     payload = re.sub(r'cid:([\w_@.-]+)', functools.partial(cid_replace, cid_parts_used),
-                     str(payload, charset))
+                     str(payload, charset, errors='ignore'))
 
     return (payload, cid_parts_used)
 
