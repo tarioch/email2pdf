@@ -16,6 +16,9 @@ spec:
   ) {
 
   node(label) {
+    stage('Checkout') {
+        checkout scm
+    }
     stage('Build with Kaniko') {
       container(name: 'kaniko', shell: '/busybox/sh') {
         withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
