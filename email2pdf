@@ -250,11 +250,11 @@ def get_input_data(args):
 
     if args.input_file.strip() == "-":
         data = ""
-        input_stream = io.TextIOWrapper(sys.stdin.buffer, encoding=args.input_encoding)
+        input_stream = io.TextIOWrapper(sys.stdin.buffer, encoding=args.input_encoding, errors='ignore')
         for line in input_stream:
             data += line
     else:
-        with open(args.input_file, "r", encoding=args.input_encoding) as input_handle:
+        with open(args.input_file, "r", encoding=args.input_encoding, errors='ignore') as input_handle:
             data = input_handle.read()
 
     return data
